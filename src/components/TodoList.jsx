@@ -8,7 +8,7 @@ const TodoList = (props) => {
     filteredTasks,
   } = props;
 
-  const hasTasks = tasks.length() > 0;
+  const hasTasks = tasks.length > 0;
   const isEmptyFilteredTasks = filteredTasks?.length === 0;
 
   if (!hasTasks) {
