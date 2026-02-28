@@ -5,11 +5,17 @@ import TodoList from "./TodoList";
 import { useEffect, useState } from "react";
 
 const Todo = () => {
-  const [tasks, setTasks] = useState([
-    { id: "task-1", title: "Купить молоко", isDone: false },
-    { id: "task-2", title: "Погладить кота", isDone: true },
-    { id: "task-3", title: "Пососаfть хуй", isDone: false },
-  ]);
+
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks")
+
+    if (savedTasks) {
+      return JSON.parse(savedTasks)
+    }
+
+    return [{ id: "task-1", title: "Купить молоко", isDone: false },
+    { id: "task-2", title: "Погладить кота", isDone: true }]
+  });
 
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
@@ -56,17 +62,6 @@ const Todo = () => {
   };
 
   useEffect( () => {
-    console.log('компонент туду смонтирован. Загружаем в таскс данные из хранилища')
-    const savedTasks = localStorage.getItem("tasks")
-
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks))
-    }
-  }, [])
-
-
-  useEffect( () => {
-    console.log("Сохраняем данные в хранилище. Т.к изменился tasks:", tasks)
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
