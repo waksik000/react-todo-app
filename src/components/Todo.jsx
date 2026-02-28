@@ -57,6 +57,7 @@ const Todo = () => {
 
       setTasks([...tasks, newTask]);
       setNewTaskTitle("");
+      setSearchQuery('')
     }
   };
 
